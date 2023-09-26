@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>BO Medan Garuda Indonesia</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+        
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/magnific-popup.css">
+
+        <link href="css/aos.css" rel="stylesheet">
+
+        <link href="css/templatemo-nomad-force.css" rel="stylesheet">
+
+    </head>
+    
+    <body>
+    
+        <main>
+
+            <section class="hero" id="hero">
+                <div class="heroText">
+                    <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
+                        BO GARUDA INDONESIA MEDAN
+                    </h1>
+
+                    <p class="text-secondary-white-color"  >
+                        The Airline Of  <strong class="custom-underline">INDONESIA</strong>
+                    </p>
+                </div>
+
+                <div class="videoWrapper">
+                    <video autoplay="" loop="" muted="" class="custom-video" poster="videos/banner-fleet-4-new.jpg">
+                        <source src="videos/814dc43e870597176cad645798825c03.mp4" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="overlay"></div>
+            </section>
+
+            <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="index.php">
+                        <img src="images/portfolio/Icon-grd.png"/>
+                        <strong>BO Garuda Indonesia Medan</strong>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.php#hero">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php#about">About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php#portfolio">Anak Perusahaan</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php#news">News & Events</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php#contact">Contact Us</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.garuda-indonesia.com/id/id/index">Booking Tiket</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <?php
+                include('conn/connection.php');
+
+                if(!isset($_GET['news'])) {
+                    echo "<script> alert('URL tidak ditemukan'); window.location.href='\index.php'; </script>";
+                }
+                $id = $_GET['news'];
+                $queryDetailSubNews = "SELECT * FROM tbl_news_event WHERE id = $id ORDER BY date_publish DESC";
+                $resultDetailSubNews = mysqli_query($db, $queryDetailSubNews);
+        
+                if(mysqli_num_rows($resultDetailSubNews) > 0){
+                    while($data = mysqli_fetch_array($resultDetailSubNews)){
+            ?>
+            <section class="news-detail section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-10 mx-auto">
+                            <h2 class="mb-3" data-aos="fade-up"><?= $data['title'] ?></h2>
+                            <p class="me-4" data-aos="fade-up" style="text-align:justify"><?= $data['location'] ?>, <?= date('d F Y', strtotime($data['date_publish'])) ?> – </p>
+
+                            <div class="clearfix my-4 mt-lg-0 mt-5">
+                                <div class="col-md-6 float-md-end mb-3 ms-md-3" data-aos="fade-up">
+                                    <figure class="figure">
+                                        <img src="data:image/webp;base64,<?= base64_encode($data['image_events']) ?>"  class="img-fluid news-image" alt="">
+                                        <figcaption class="figure-caption text-end"><?= $data['cap_image'] ?></figcaption>
+                                    </figure>
+                                </div>
+                                    <p data-aos="fade-up"> <?= nl2br($data['desc_event']) ?> </p>
+                            </div>
+
+                            <div class="social-share d-flex mt-5">
+                                <span class="me-4" data-aos="zoom-in">PT GARUDA INDONESIA (PERSERO) TBK.
+                                    CORPORATE SECRETARY </span>
+
+                                <a href="https://www.facebook.com/garudaindonesia/?locale=id_ID" class="social-share-icon bi-facebook" data-aos="zoom-in"></a>
+
+                                <a href="https://twitter.com/indonesiagaruda?lang=en" class="social-share-icon bi-twitter mx-3" data-aos="zoom-in"></a>
+
+                                <a href="mailto:customer@garuda-indonesia.com" class="social-share-icon bi-envelope" data-aos="zoom-in"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <?php
+                    }
+                }
+            ?>
+
+            <section class="related-news section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-8 col-10 mx-auto text-center">
+                            <span class="d-block" data-aos="zoom-in">Previous article</span>
+
+                            <h3 class="news-title" data-aos="fade-up">
+                                <a href="news-detail-1.html" class="news-title-link">GARUDA INDONESIA OPERASIKAN PENERBANGAN EVAKUASI BAGI 385 WNI DI SUDAN</a>
+                            </h3>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        
+                        <img src="images/portfolio/logo_white.webp" class="sky-logo" alt="" >
+                        <a href="mailto:customer@garuda-indonesia.com" class="custom-link mt-3 mb-5">
+                            customer@garuda-indonesia.com
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <p class="copyright-text mb-0">Copyright © BO Garuda Indonesia Medan 2023
+                        <br>Design By: <a href="https://www.instagram.com/ryan_angin/" target="_parent">Ryan Perangin Angin</a></p>
+                        
+                    </div>
+                    
+                    <div class="col-lg-3 col-5 ms-auto">
+                        
+                        <ul class="social-icon">
+                            <li><a href="https://www.facebook.com/garudaindonesia/?locale=id_ID" class="social-icon-link bi-facebook"></a></li>
+
+                            <li><a href="https://twitter.com/indonesiagaruda?lang=en" class="social-icon-link bi-twitter"></a></li>
+
+                            <li><a href="https://www.instagram.com/garuda.indonesia/?hl=en" class="social-icon-link bi-instagram"></a></li>
+
+                            <li><a href="https://www.youtube.com/@GarudaIndonesia1949" class="social-icon-link bi-youtube"></a></li>
+                            
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/magnific-popup-options.js"></script>
+        <script src="js/scrollspy.min.js"></script>
+        <script src="js/custom.js"></script>
+
+    </body>
+</html>
