@@ -107,7 +107,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form action="edit-news.php" method="post" enctype="multipart/form-data">
+    <form action="../function/edit-news.php" method="post" enctype="multipart/form-data">
       <div class="modal-body">
         <div class="input-group input-group-static mb-4">
           <label>Title</label>
@@ -129,11 +129,11 @@
           <label>Publish ?</label>
           <div>
             <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="<?=$data['published']?>" <?=($data['published'] == 1) ? 'checked' : ''?>>
+              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="1" <?=($data['published'] == 1) ? 'checked' : ''?>>
               <label class="custom-control-label" for="customRadio1">Published</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish2" value="<?=$data['published']?>" <?=($data['published'] == 0) ? 'checked' : ''?>>
+              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish2" value="0" <?=($data['published'] == 0) ? 'checked' : ''?>>
               <label class="custom-control-label" for="customRadio2">Hidden</label>
             </div>
           </div>
@@ -148,8 +148,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <input type="hidden" name="id" value="<?= $data['id'] ?>">
         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn bg-gradient-primary">Save Changes</button>
+        <button type="submit" name="submit" class="btn bg-gradient-primary">Save Changes</button>
       </div>
     </form>
     </div>
