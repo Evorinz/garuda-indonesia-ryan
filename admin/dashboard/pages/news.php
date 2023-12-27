@@ -58,7 +58,7 @@
           <input type="date" class="form-control" name="datePublish">
         </div>
         <div class="input-group input-group-static mb-4">
-          <label>Pubish ?</label>
+          <label>Publish ?</label>
           <div>
             <div class="form-check mb-3">
               <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="1">
@@ -98,7 +98,7 @@
   if(mysqli_num_rows($resultNews) > 0){
     while($data = mysqli_fetch_array($resultNews)){
 ?>
-<div class="modal fade" id="editBerita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editBerita<?=$data['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -126,7 +126,7 @@
           <input type="date" class="form-control" name="datePublish" value="<?=$data['date_publish']?>">
         </div>
         <div class="input-group input-group-static mb-4">
-          <label>Pubish ?</label>
+          <label>Publish ?</label>
           <div>
             <div class="form-check mb-3">
               <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="<?=$data['published']?>" <?=($data['published'] == 1) ? 'checked' : ''?>>
@@ -141,6 +141,10 @@
         <div class="input-group input-group-static mb-4" st>
           <label>Images Event/News</label><span class="text-primary" style="font-size:10px">*Kosongkan jika tidak ingin update gambar</span>
           <input type="file" class="form-control" name="fileToUpload" accept="image/*" id="fileToUpload" value="../../images/news/<?=$data['image_events']?>">
+        </div>
+        <div class="input-group input-group-static mb-4">
+          <label>Caption Images</label>
+          <textarea type="text" class="form-control" name="capImages" value="<?=$data['cap_image']?>"><?=$data['cap_image']?></textarea>
         </div>
       </div>
       <div class="modal-footer">
@@ -269,7 +273,7 @@
                         <span class="text-secondary text-xs font-weight-bold"><?= date_format(date_create($data['date_publish']), "d-M-Y")?></span>
                       </td>
                       <td class="align-middle">
-                        <button class="btn btn-link btn-sm px-1 text-success" data-bs-toggle="modal" data-bs-target="#editBerita">Edit</button>
+                        <button class="btn btn-link btn-sm px-1 text-success" data-bs-toggle="modal" data-bs-target="#editBerita<?=$data['id']?>">Edit</button>
                         <form method="post" action="../function/delete-news.php" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data berita ini?');">
                           <input type="hidden" name="id" value="<?= $data['id'] ?>">
                           <button class="btn btn-link btn-sm px-1" type="submit" name="delete">Hapus</button>
