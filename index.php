@@ -334,8 +334,11 @@
 
                         <div class="col-lg-6 col-12">
                             <div class="news-thumb" data-aos="fade-up">
-                                <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-warning">
+                                <!-- <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-warning">
                                     <img src="data:image/webp;base64,<?= base64_encode($data['image_events']) ?>" class="img-fluid large-news-image news-image">
+                                </a> -->
+                                <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-warning">
+                                    <img src="images/news/<?= $data['image_events'] ?>" class="img-fluid large-news-image news-image" alt="<?= ($data['image_events']) ?>">
                                 </a>
 
                                 <div class="news-category bg-success text-white">News</div>
@@ -375,8 +378,11 @@
                             <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">
                                 <div class="news-top w-100">
                                     
-                                    <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-primary">
+                                    <!-- <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-primary">
                                         <img src="data:image/png;base64,<?= base64_encode($data['image_events']) ?>" class="img-fluid news-image" alt="">
+                                    </a> -->
+                                    <a href="news-detail.php?news=<?=$data['id']?>" class="news-image-hover news-image-hover-primary">
+                                        <img src="images/news/<?= $data['image_events'] ?>" class="img-fluid news-image" alt="">
                                     </a>
 
                                     <div class="news-category bg-primary text-white">News</div>

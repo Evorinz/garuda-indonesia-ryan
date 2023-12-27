@@ -12,7 +12,7 @@
         if ($result->num_rows > 0) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION['username'] = $row['username'];
-            header("Location: index.php");
+            header("Location: dashboard/index.php");
             exit();
         } else {
             echo "<script>alert('Username atau password Anda salah. Silakan coba lagi!'); window.location.href='login.php'</script>";
