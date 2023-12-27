@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,47 +39,51 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+    <form action="../function/insert-news.php" method="post" enctype="multipart/form-data">
       <div class="modal-body">
-      <form>
         <div class="input-group input-group-static mb-4">
           <label>Title</label>
-          <input type="text" class="form-control" value="Rio">
+          <input type="text" class="form-control" name="title">
         </div>
         <div class="input-group input-group-static mb-4">
           <label>Description Event/News</label>
-          <input type="text" class="form-control" value="Rio">
+          <input type="text" class="form-control" name="desc">
         </div>
         <div class="input-group input-group-static mb-4">
           <label>Location</label>
-          <input type="text" class="form-control" value="Rio">
+          <input type="text" class="form-control" name="location">
         </div>
         <div class="input-group input-group-static mb-4">
           <label>Date Of Publish</label>
-          <input type="date" class="form-control">
+          <input type="date" class="form-control" name="datePublish">
         </div>
         <div class="input-group input-group-static mb-4">
           <label>Pubish ?</label>
           <div>
             <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-              <label class="custom-control-label" for="customRadio1">Published</label>
+              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="1">
+              <label class="custom-control-label" for="publish1">Published</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio2">
-              <label class="custom-control-label" for="customRadio2">Hidden</label>
+              <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish2" value="0">
+              <label class="custom-control-label" for="publish2">Hidden</label>
             </div>
           </div>
         </div>
         <div class="input-group input-group-static mb-4">
           <label>Images Event/News</label>
-          <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+          <input type="file" class="form-control" accept="image/*" name="fileToUpload" id="fileToUpload">
         </div>
-      </form>
+        <div class="input-group input-group-static mb-4">
+          <label>Caption Images</label>
+          <input type="text" class="form-control" name="capImages">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn bg-gradient-primary">Save</button>
+        <button type="submit" name="submit" class="btn bg-gradient-primary">Save</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
@@ -117,8 +107,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+    <form action="edit-news.php" method="post" enctype="multipart/form-data">
       <div class="modal-body">
-      <form action="edit-news.php" method="post" enctype="multipart/form-data">
         <div class="input-group input-group-static mb-4">
           <label>Title</label>
           <input type="text" class="form-control" name="title" value="<?=$data['title']?>">
@@ -148,16 +138,16 @@
             </div>
           </div>
         </div>
-        <div class="input-group input-group-static mb-4">
-          <label>Images Event/News</label>
-          <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+        <div class="input-group input-group-static mb-4" st>
+          <label>Images Event/News</label><span class="text-primary" style="font-size:10px">*Kosongkan jika tidak ingin update gambar</span>
+          <input type="file" class="form-control" name="fileToUpload" accept="image/*" id="fileToUpload" value="../../images/news/<?=$data['image_events']?>">
         </div>
-      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn bg-gradient-primary">Save Changes</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

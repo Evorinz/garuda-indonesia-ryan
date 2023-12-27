@@ -1,13 +1,15 @@
 <?php
+include('../../../conn/connection.php');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $title = $_POST['title'];
     $desc = $_POST['desc'];
     $location = $_POST['location'];
     $datePublish = $_POST['datePublish'];
     $optPublishOrNot = $_POST['optPublishOrNot'];
-    $fileToUpload = $_POST['fileToUpload'];
+    $capImages = $_POST['capImages'];
 
-    $target_dir = "../../images/";
+    $target_dir = "../../../images/news/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -30,15 +32,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         ";
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $sql = "INSERT INTO tbl_news_event (title, location, date_publish, published, desc_event, cap_image, image_events) VALUES ('$title', '$desc', $location, $datePublish, $optPublishOrNot,'" . basename($_FILES["fileToUpload"]["name"]) . "')";
+            $sql = "INSERT INTO tbl_news_event (title, location, date_publish, published, desc_event, cap_image, image_events) VALUES 
+                                    ('$title', '$location', '$datePublish', '$optPublishOrNot', '$desc', '$capImages', '" . basename($_FILES["fileToUpload"]["name"]) . "')";
+
             $result = mysqli_query($db, $sql);
             if ($result) {
+                echo "
+                    <script>
+                        alert('Berita Berhasil Disimpan');
+                    </script>
+                ";
                 header('Location: ../pages/news.php');
                 exit();
             } else {
+                echo mysqli_error($db);
                 echo "
                     <script>
-                        alert('Gagal Hapus Berita');
+                        alert('Gagal Simpan Berita');
                     </script>
                 ";
             }
