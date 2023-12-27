@@ -140,11 +140,11 @@
           <div>
             <div class="form-check mb-3">
               <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish1" value="<?=$data['published']?>" <?=($data['published'] == 1) ? 'checked' : ''?>>
-              <label class="custom-control-label" for="customRadio1"><?=$data['published']?>Published</label>
+              <label class="custom-control-label" for="customRadio1">Published</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="optPublishOrNot" id="publish2" value="<?=$data['published']?>" <?=($data['published'] == 0) ? 'checked' : ''?>>
-              <label class="custom-control-label" for="customRadio2"><?=$data['published']?>Hidden</label>
+              <label class="custom-control-label" for="customRadio2">Hidden</label>
             </div>
           </div>
         </div>
