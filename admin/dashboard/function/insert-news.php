@@ -9,8 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $optPublishOrNot = $_POST['optPublishOrNot'];
     $capImages = $_POST['capImages'];
 
+    $namaFile = uniqid();
+    $namaFileBaru = $namaFile . '.' . pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION);
+
     $target_dir = "../../../images/news/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . $namaFileBaru;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -30,27 +33,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 alert('Maaf, file tidak diunggah.');
             </script>
         ";
+        header('Location: ../pages/news.php');
+        exit();
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $sql = "INSERT INTO tbl_news_event (title, location, date_publish, published, desc_event, cap_image, image_events) VALUES 
-                                    ('$title', '$location', '$datePublish', '$optPublishOrNot', '$desc', '$capImages', '" . basename($_FILES["fileToUpload"]["name"]) . "')";
+            $sql = "INSERT INTO tbl_news_event (title, location, date_publish, published, desc_event, cap_image, image_events) VALUES (?,?,?,?,?,?,?)";
 
-            $result = mysqli_query($db, $sql);
-            if ($result) {
+            $stmt = mysqli_prepare($db, $sql);
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, "sssssss", $title, $location, $datePublish, $optPublishOrNot, $desc, $capImages, $namaFileBaru);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "
+                        <script>
+                            alert('Berita Berhasil Disimpan');
+                        </script>
+                    ";
+                }else{
+                    echo "
+                    <script>
+                    alert('Berita Gagal Disimpan');
+                    </script>
+                    ";
+                }
+                header('Location: ../pages/news.php');
+                exit();
+            } else {
                 echo "
                     <script>
-                        alert('Berita Berhasil Disimpan');
+                        alert('Gagal mempersiapkan statement');
                     </script>
                 ";
                 header('Location: ../pages/news.php');
                 exit();
-            } else {
-                echo mysqli_error($db);
-                echo "
-                    <script>
-                        alert('Gagal Simpan Berita');
-                    </script>
-                ";
             }
         } else {
             echo "
@@ -58,6 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     alert('Maaf, terjadi kesalahan saat mengunggah file.');
                 </script>
             ";
+            header('Location: ../pages/news.php');
+            exit();
         }
     }
 }

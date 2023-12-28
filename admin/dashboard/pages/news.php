@@ -25,10 +25,59 @@
     .table td, .table th {
         white-space: normal;
     }
+    .element:hover {
+        cursor: pointer;
+    }
+    .gambar {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 5%;
+    }
   </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+<!-- Modal Foto Berita -->
+<?php
+  include('../../../conn/connection.php');
+  $queryNews = "SELECT * FROM tbl_news_event";
+  $resultNews = mysqli_query($db, $queryNews);
+
+  if(mysqli_num_rows($resultNews) > 0){
+    while($data = mysqli_fetch_array($resultNews)){
+?>
+<div class="modal fade" id="fotoBerita<?=$data['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Image Berita</h5>
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <label><?=$data['title']?></label>
+
+          <br>
+            <img src="../../../images/news/<?= $data['image_events'] ?>" class="gambar" alt="user1">
+          <br>
+          <br>
+
+          <label>**<?=$data['cap_image']?></label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php
+    }
+  }
+?>
+<!-- End Modal Foto Berita -->
+
 <!-- Modal Tambah Berita -->
 <div class="modal fade" id="tambahBerita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -230,7 +279,7 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 px-3" style="display:flex; justify-content:space-between;white-space: normal;">
                 <h6 class="text-white text-capitalize">News and Event</h6>
-                <button class="btn btn-info btn-sm px-1" name="tambah" data-bs-toggle="modal" data-bs-target="#tambahBerita">Tambah Berita</button>
+                <button class="btn bg-gradient-info btn-sm px-1" name="tambah" data-bs-toggle="modal" data-bs-target="#tambahBerita">Tambah Berita</button>
               </div>
               <!-- <button type="button" class="btn btn-info">Tambah Berita</button> -->
             </div>
@@ -258,7 +307,7 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
-                          <img src="../../../images/news/<?= $data['image_events'] ?>" class="avatar avatar-xl me-3 border-radius-lg" alt="user1">
+                          <img src="../../../images/news/<?= $data['image_events'] ?>" class="avatar avatar-xl me-3 border-radius-lg element" alt="user1" data-bs-toggle="modal" data-bs-target="#fotoBerita<?=$data['id']?>">
                         </div>
                       </td>
                       <td>
@@ -292,34 +341,15 @@
           </div>
         </div>
       </div>
-      <footer class="footer py-4  ">
+      <footer class="footer py-2">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+                </script>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>

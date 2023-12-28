@@ -12,10 +12,12 @@ if (isset($_POST['delete'])) {
         exit();
     } else {
         echo "
-            <script>
-                alert('Gagal Hapus Berita');
-            </script>
+        <script>
+        alert('Gagal Hapus Berita');
+        </script>
         ";
+        header('Location: ../pages/news.php');
+        exit();
     }
 }
 ?>
